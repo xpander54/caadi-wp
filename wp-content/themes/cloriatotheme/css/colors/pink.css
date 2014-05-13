@@ -1,0 +1,29 @@
+#menu li.current-menu-item a, li.current_page_item a, #menu li.current-menu-parent a, #menu li.current_page_parent a, #menu li a.selected, #menu li a:hover {background:url(../../images/menuline-pink.png) repeat-x bottom;margin:0;}
+#menu .ddsmoothmenu li li a.selected, #menu .ddsmoothmenu li li a:hover {color:#bd1546;}
+#slides .caption {border-left:5px solid #d60e44;}
+#slides a.prev {background: url('../../images/pinkarrows.png')  no-repeat 0 0;
+	width: 20px;
+	height: 56px;}
+#slides a.next {background: url('../../images/pinkarrows.png')  no-repeat -24px 0;
+	width: 20px;
+	height: 56px;
+}
+#slides a.prev:hover{background: url('../../images/pinkarrows.png') no-repeat 0 -61px;
+	width: 20px;
+	height: 56px;}
+#slides a.next:hover {background: url('../../images/pinkarrows.png') no-repeat -24px -61px;
+	width: 20px;
+	height: 56px;}
+.footer-content .footer-glow {background: url(../../images/footer-glow-pink.png) repeat-x;height:41px;width:100%;}
+.footer-content .footer_wrap {background: url(../../images/footer-bg-pink.png);}
+.footer {overflow:hidden;background: url(../../images/footer-line-pink.png) repeat-y 50%;}
+@media only screen and (min-width: 768px) and (max-width: 960px) { 
+.footer {background: none;}
+}
+@media only screen and (max-width: 768px) { 
+.footer {background: none;}
+#menu li.current-menu-item a, li.current_page_item a, #menu li.current-menu-parent a, #menu li.current_page_parent a, #menu li a.selected, #menu li a:hover {
+background:none;
+margin:0;
+}
+}

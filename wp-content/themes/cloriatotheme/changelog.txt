@@ -1,0 +1,53 @@
+== Changelog ==
+
+= Theme Name: Cloriato Theme =
+
+= Version: 2.0.5 =
+1. Button Shortcode Add.
+
+= Version: 2.0.4 =
+1. Slider Issue Fixed.
+
+= Version: 2.0.3 =
+1. Style Improved.
+2. Slider Issue Fixed.
+3. Comment Form Improved.
+4. Responsive Issue Fixed.
+5. Sidebar Search Improved.
+
+
+= Version: 2.0.2 =
+1. default css and jquery call issue fixed.
+
+= Version: 2.0.1 =
+*Slider Images Clickable.
+
+= Version: 2.0 =
+.Theme style converted  into responsive design.
+
+= Version: 1.2 =
+ * Timthumb script remove, Dynamic Image Cropping script used.
+
+= Version: 1.1 =
+
+* New Zoombox updated.
+
+* Slider stack resolved.
+
+* Enable blog page in front page.
+
+* Slider video bug fixed.
+
+* Language translation enabled.
+
+* Slider video enabled.
+
+* Upgraded to single slider.
+
+* Removed unnecessary comments from all files.
+
+* Resolved Page list in sidebar widget.
+
+
+
+
