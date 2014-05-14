@@ -114,7 +114,7 @@ function cff_settings_page() {
         ?>
         <h2 class="nav-tab-wrapper">
             <a href="?page=cff-top&amp;tab=configuration" class="nav-tab <?php echo $active_tab == 'configuration' ? 'nav-tab-active' : ''; ?>"><?php _e('Configuration'); ?></a>
-            <a href="?page=cff-style" class="nav-tab <?php echo $active_tab == 'support' ? 'nav-tab-active' : ''; ?>"><?php _e('Customize'); ?></a>
+            <a href="?page=cff-style" class="nav-tab <?php echo $active_tab == 'customize' ? 'nav-tab-active' : ''; ?>"><?php _e('Customize'); ?></a>
             <a href="?page=cff-top&amp;tab=support" class="nav-tab <?php echo $active_tab == 'support' ? 'nav-tab-active' : ''; ?>"><?php _e('Support'); ?></a>
         </h2>
 
@@ -319,6 +319,9 @@ function cff_settings_page() {
         <p>[custom-facebook-feed <b><span style='color: green;'>id=some-other-page-id num=3 height=500px</span></b>]</p>
         <p><a href="http://smashballoon.com/custom-facebook-feed/docs/shortcodes/" target="_blank"><?php _e('See a full list of shortcode options'); ?></a></p>
 
+        <br />
+        <a href="http://smashballoon.com/custom-facebook-feed/demo" target="_blank"><img src="<?php echo plugins_url( 'img/pro.png' , __FILE__ ) ?>" /></a>
+
     <?php } //End config tab ?>
 
 
@@ -365,8 +368,18 @@ function cff_settings_page() {
 
     <?php } ?>
         
-
-    <?php 
+        
+<?php 
+} //End Settings_Page 
+//Create Style page
+function cff_style_page() {
+    //Declare variables for fields
+    $style_hidden_field_name                = 'cff_style_submit_hidden';
+    $style_general_hidden_field_name        = 'cff_style_general_submit_hidden';
+    $style_post_layout_hidden_field_name    = 'cff_style_post_layout_submit_hidden';
+    $style_typography_hidden_field_name     = 'cff_style_typography_submit_hidden';
+    $style_misc_hidden_field_name           = 'cff_style_misc_submit_hidden';
+    $style_custom_text_hidden_field_name    = 'cff_style_custom_text_submit_hidden';
 
     //Defaults need to be here on the Settings page so that they're saved when the initial settings are saved
     $defaults = array(
@@ -453,6 +466,7 @@ function cff_settings_page() {
         'cff_like_box_position'     => 'bottom',
         'cff_like_box_outside'      => false,
         'cff_likebox_width'         => '',
+        'cff_likebox_height'        => '',
         'cff_like_box_faces'        => false,
         'cff_like_box_border'       => false,
 
@@ -517,23 +531,6 @@ function cff_settings_page() {
     //Save layout option in an array
     $options = wp_parse_args(get_option('cff_style_settings'), $defaults);
     add_option( 'cff_style_settings', $options );
-
-    ?>
-
-        
-<?php 
-} //End Settings_Page 
-//Create Style page
-function cff_style_page() {
-    //Declare variables for fields
-    $style_hidden_field_name                = 'cff_style_submit_hidden';
-    $style_general_hidden_field_name        = 'cff_style_general_submit_hidden';
-    $style_post_layout_hidden_field_name    = 'cff_style_post_layout_submit_hidden';
-    $style_typography_hidden_field_name     = 'cff_style_typography_submit_hidden';
-    $style_misc_hidden_field_name           = 'cff_style_misc_submit_hidden';
-    $style_custom_text_hidden_field_name    = 'cff_style_custom_text_submit_hidden';
-    
-    $options = get_option('cff_style_settings');
 
     //Set the page variables
     //Post types
@@ -641,6 +638,7 @@ function cff_style_page() {
     $cff_like_box_position = $options[ 'cff_like_box_position' ];
     $cff_like_box_outside = $options[ 'cff_like_box_outside' ];
     $cff_likebox_width = $options[ 'cff_likebox_width' ];
+    $cff_likebox_height = $options[ 'cff_likebox_height' ];
     $cff_like_box_faces = $options[ 'cff_like_box_faces' ];
     $cff_like_box_border = $options[ 'cff_like_box_border' ];
 
@@ -956,6 +954,7 @@ function cff_style_page() {
             if (isset($_POST[ 'cff_like_box_text_color' ])) $cff_like_box_text_color = $_POST[ 'cff_like_box_text_color' ];
 
             if (isset($_POST[ 'cff_likebox_width' ])) $cff_likebox_width = $_POST[ 'cff_likebox_width' ];
+            if (isset($_POST[ 'cff_likebox_height' ])) $cff_likebox_height = $_POST[ 'cff_likebox_height' ];
             (isset($_POST[ 'cff_like_box_faces' ])) ? $cff_like_box_faces = $_POST[ 'cff_like_box_faces' ] : $cff_like_box_faces = '';
             (isset($_POST[ 'cff_like_box_border' ])) ? $cff_like_box_border = $_POST[ 'cff_like_box_border' ] : $cff_like_box_border = '';
 
@@ -984,6 +983,7 @@ function cff_style_page() {
             $options[ 'cff_like_box_text_color' ] = $cff_like_box_text_color;
 
             $options[ 'cff_likebox_width' ] = $cff_likebox_width;
+            $options[ 'cff_likebox_height' ] = $cff_likebox_height;
             $options[ 'cff_like_box_faces' ] = $cff_like_box_faces;
             $options[ 'cff_like_box_border' ] = $cff_like_box_border;
 
@@ -2236,6 +2236,13 @@ function cff_style_page() {
                         </td>
                     </tr>
                     <tr valign="top">
+                        <th class="bump-left" for="cff_likebox_height" scope="row"><label><?php _e('Custom Like Box Height'); ?></label></th>
+                        <td>
+                            <input name="cff_likebox_height" type="text" value="<?php esc_attr_e( $cff_likebox_height ); ?>" size="3" />
+                            <span>px</span>
+                        </td>
+                    </tr>
+                    <tr valign="top">
                         <th class="bump-left" scope="row"><label><?php _e('Show faces of fans'); ?></label></th>
                         <td>
                             <input type="checkbox" name="cff_like_box_faces" id="cff_like_box_faces" <?php if($cff_like_box_faces == true) echo 'checked="checked"' ?> />&nbsp;<?php _e('Yes'); ?>
@@ -2251,6 +2258,8 @@ function cff_style_page() {
                     </tr>
                 </tbody>
             </table>
+
+            <?php submit_button(); ?>
 
             <hr />
             <h3><?php _e('Custom CSS'); ?></h3>
@@ -2285,7 +2294,6 @@ function cff_style_page() {
                     </tr>
                 </tbody>
             </table>
-            <?php submit_button(); ?>
 
 
             <hr />

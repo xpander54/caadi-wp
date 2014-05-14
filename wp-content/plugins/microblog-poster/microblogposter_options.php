@@ -34,6 +34,8 @@ function microblogposter_settings_output()
     $default_pbehavior_update_name = "microblogposter_default_pbehavior_update";
     $page_mode_name = "microblogposter_page_mode";
     $excluded_categories_name = "microblogposter_excluded_categories";
+    $enabled_custom_types_name = "microblogposter_enabled_custom_types";
+    $enabled_custom_updates_name = "microblogposter_enabled_custom_updates";
     $customer_license_key_name = "microblogposterpro_plg_customer_license_key";
     $pro_control_dash_mode_name = "microblogposter_plg_control_dash_mode";
     $shortcode_title_max_length_name = "microblogposter_plg_shortcode_title_max_length";
@@ -51,6 +53,10 @@ function microblogposter_settings_output()
     $page_mode_value = get_option($page_mode_name, "");
     $excluded_categories_value = get_option($excluded_categories_name, "");
     $excluded_categories_value = json_decode($excluded_categories_value, true);
+    $enabled_custom_types_value = get_option($enabled_custom_types_name, "");
+    $enabled_custom_types_value = json_decode($enabled_custom_types_value, true);
+    $enabled_custom_updates_value = get_option($enabled_custom_updates_name, "");
+    $enabled_custom_updates_value = json_decode($enabled_custom_updates_value, true);
     $customer_license_key_value = get_option($customer_license_key_name, "");
     $pro_control_dash_mode_value = get_option($pro_control_dash_mode_name, "");
     $shortcode_title_max_length_value = get_option($shortcode_title_max_length_name, "110");
@@ -95,6 +101,10 @@ function microblogposter_settings_output()
         $page_mode_value = $_POST[$page_mode_name];
         $excluded_categories_value = $_POST[$excluded_categories_name];
         $excluded_categories_value = json_encode($excluded_categories_value);
+        $enabled_custom_types_value = $_POST[$enabled_custom_types_name];
+        $enabled_custom_types_value = json_encode($enabled_custom_types_value);
+        $enabled_custom_updates_value = $_POST[$enabled_custom_updates_name];
+        $enabled_custom_updates_value = json_encode($enabled_custom_updates_value);
         $pro_control_dash_mode_value = $_POST[$pro_control_dash_mode_name];
         $shortcode_title_max_length_value_temp = trim($_POST[$shortcode_title_max_length_name]);
         if(intval($shortcode_title_max_length_value_temp) && 
@@ -135,6 +145,10 @@ function microblogposter_settings_output()
         
         update_option($excluded_categories_name, $excluded_categories_value);
         $excluded_categories_value = json_decode($excluded_categories_value, true);
+        update_option($enabled_custom_types_name, $enabled_custom_types_value);
+        $enabled_custom_types_value = json_decode($enabled_custom_types_value, true);
+        update_option($enabled_custom_updates_name, $enabled_custom_updates_value);
+        $enabled_custom_updates_value = json_decode($enabled_custom_updates_value, true);
         
         update_option($pro_control_dash_mode_name, $pro_control_dash_mode_value);
         update_option($shortcode_title_max_length_name, $shortcode_title_max_length_value);
@@ -151,6 +165,16 @@ function microblogposter_settings_output()
     if(is_array($excluded_categories_value))
     {
         $excluded_categories = $excluded_categories_value;
+    }
+    $enabled_custom_types = array();
+    if(is_array($enabled_custom_types_value))
+    {
+        $enabled_custom_types = $enabled_custom_types_value;
+    }
+    $enabled_custom_updates = array();
+    if(is_array($enabled_custom_updates_value))
+    {
+        $enabled_custom_updates = $enabled_custom_updates_value;
     }
     
     $http_auth_sites = array('friendfeed','delicious','diigo');
@@ -1065,6 +1089,41 @@ function microblogposter_settings_output()
                     </tr>
                     <tr>
                         <td colspan="2">
+                            <h3><span class="wp-blue-title">Custom Post Types :</span></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="mbp-excluded-category-header">Check Custom Post Types for which you want to enable <span class="microblogposter-name">MicroblogPoster</span>.</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="mbp-excluded-category-td">
+                    <?php
+                        $args = array(
+                            'public' => true,
+                            '_builtin' => false
+                        );
+                        $custom_post_types=get_post_types($args, 'names', 'and');
+                        if(is_array($custom_post_types) && !empty($custom_post_types))
+                        {
+                            foreach ($custom_post_types as $custom_post_type)
+                            {
+                                microblogposter_display_custom_type($custom_post_type, '<span class="mbp-separator-span"></span>', $enabled_custom_types, $enabled_custom_updates);
+                            }
+                        }
+                        else
+                        {
+                            ?>
+                            Currently, no custom types are active.
+                            <?php        
+                        }
+                    ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="row-sep"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
                             <h3><span class="wp-blue-title">Categories to exclude posts from Cross Posting :</span></h3>
                         </td>
                     </tr>
@@ -1086,6 +1145,9 @@ function microblogposter_settings_output()
                         }
                     ?>
                         </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="row-sep"></td>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -3596,6 +3658,19 @@ function microblogposter_display_category($category, $sep, $excluded_categories)
             microblogposter_display_category($category1, $sep.'<span class="mbp-separator-span"></span>', $excluded_categories);
         }
     }
+}
+
+function microblogposter_display_custom_type($custom_type, $sep, $enabled_custom_types, $enabled_custom_updates)
+{
+    
+    ?>
+    <?php echo $sep;?>
+    <input type="checkbox" class="mbp-excluded-category" id="microblogposter_enabled_custom_types_<?php echo $custom_type;?>" name="microblogposter_enabled_custom_types[]" value="<?php echo $custom_type;?>" <?php if(in_array($custom_type, $enabled_custom_types)) echo 'checked="checked"';?> /> 
+    <label for="microblogposter_enabled_custom_types_<?php echo $custom_type;?>" ><?php echo $custom_type;?></label> 
+    &nbsp;&nbsp;-&nbsp;&nbsp;Don't cross-post automatically on Update&nbsp;<input type="checkbox" class="mbp-excluded-category" id="microblogposter_enabled_custom_updates_<?php echo $custom_type;?>" name="microblogposter_enabled_custom_updates[]" value="<?php echo $custom_type;?>" <?php if(in_array($custom_type, $enabled_custom_updates)) echo 'checked="checked"';?> /> 
+    &nbsp;(This is most likely to be checked.)<br/>
+    <?php
+    
 }
 
 ?>

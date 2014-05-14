@@ -2,8 +2,8 @@
 Contributors: cybperic
 Tags: microblogging, bookmarking, bookmarks, auto posts, auto publish, social signals, cross-post, cross post, auto submit, auto update, social networks, social media, twitter, facebook, linkedin, tumblr, delicious, diigo, plurk, friendfeed, automatic, automation, links, backlinks, auto updates status, social media auto publish, social network auto publish, publish to twitter, publish to facebook
 Requires at least: 3.0
-Tested up to: 3.8
-Stable tag: 1.3.8
+Tested up to: 3.9
+Stable tag: 1.3.9
 
 Automatically publishes your new blog content to Social Networks. Auto-updates Twitter, Facebook, Linkedin, Tumblr, Diigo, Delicious..
 
@@ -17,7 +17,8 @@ Possibility to nicely format the update message per account, **shortcodes suppor
 **Logs are generated** on new blog post for each configured social network account.
 Easily follow the automated sharing process from **MicroblogPoster**'s logs section and debug your configuration if needed.
 
-**Filter posts** to be published based on excluded categories. (General section settings)
+**Custom Post Types** supported, additionally **Filter posts** to be published/cross posted to social networks based on categories. 
+(General section settings)
 
 **Currently supported social media sites**
 
@@ -60,6 +61,9 @@ Additional features are available with the [Pro Add-on](http://efficientscripts.
 3. MicroblogPoster Options page, Logs Section.
 
 == Changelog ==
+
+= 1.3.9 (11-05-2014) =
+- Added support for custom post types.
 
 = 1.3.8 (16-03-2014) =
 - Enabled twitter authorization process interactively, which allows to use multiple twitter accounts with a single twitter App.
@@ -159,56 +163,56 @@ Additional features are available with the [Pro Add-on](http://efficientscripts.
 
 **twitter.com accounts** [Help with screenshots](http://efficientscripts.com/help/microblogposter/twitterhelp "Twitter help with screenshots.")
 
-Basically your twitter username and password won't suffice in order to post automatic updates, twitter Api requires some more steps described below.
+Your Twitter username and password won't suffice in order to post automatic updates, Twitter API requires some more steps described below.
 No worries, it's rather a simple procedure.
 
 
-    1. In order to post updates through the twitter Api you will need first
-    to create your own twitter App here: https://apps.twitter.com/
+    1. To auto post updates through the Twitter API you'll need
+    to create your own Twitter App here: https://apps.twitter.com/
     
-    2. Once you have created your twitter App you have to change its access level
+    2. Once, you have created your Twitter App you have to change its Access Level
     to be Read and Write. 
-    Browse to settings tab and click on 'modify app permissions'.
-    Check the access level to be read and write. Save Settings.
+    Browse to the settings tab and click on 'Modify App Permissions'.
+    Check the Access Level to be Read and Write. Save your Settings.
 
-    3. Once this is done go back to the API Keys tab, at the bottom you 
-    should have a button 'Create my Access token', please do it.
+    3. Once, this is done return to the API Keys tab, at the bottom you 
+    should have a button 'Create My Access token', please do it.
 
-    4. This is it, on the API Keys tab you have all what you need, 
+    4. Now, on the API Keys tab you have all what you need, 
     i.e. API (Consumer) key / secret, Access token and Access token secret.
 
-    5. If you don't see immediately the Access token at the bottom, 
+    5. If you don't see immediately the Access Token at the bottom, 
     please refresh the API Keys tab page.
 
 
 **plurk.com accounts** [Help with screenshots](http://efficientscripts.com/help/microblogposter/plurkhelp "Plurk help with screenshots.")
 
-It's most likely the same as for Twitter, you will need some more effort in order to post updates through their API.
+It's most likely the same as for twitter, you'll need some more effort in order to post updates through Plurk Api.
 
 
     1. Please go at this url http://www.plurk.com/PlurkApp/ 
-    and click on 'Create a new Plurk App'.
-    For App Type, choose 'Third-party web site integration'. 
+    and click on 'Create a New Plurk App'.
+    For App Type choose 'Third-party web site integration'. 
     For App Website you can put http://localhost
 
-    2. Once you're back on 'My Plurk Apps' page, click the edit button 
-    and get your *App Key and App Secret*.
+    2. Once you are back on 'My Plurk Apps' page, click the edit button 
+    and copy your *App Key and App Secret*.
 
     3. Not finished yet, you need the second pair of credentials. 
-    On 'My Plurk Apps' page this time click on 'Test Console' button.
+    On 'My Plurk Apps' page, this time click on 'Test Console' button.
 
-    4. First click on 'Get Request Token', then some processing is done. 
-    After that click on 'Open Authorization Url', you will be redirected 
+    4. First, click on 'Get Request Token', then some processing is done. 
+    After that, click on 'Open Authorization Url', you'll be redirected 
     to a new page and you will have to grant the permission in order to get
     your verification code.
 
-    5. Finally return to the previous page and generate your 
+    5. Finally, return to the previous page and generate your 
     *Token Key and Token Secret* by clicking on
     'Get Access Token' and by providing the verification code.
 
-    6. Now you can copy your Token Key and Token Secret. 
-    Coupled with the App Key and App Secret you've got previously 
-    you can configure your Plurk account in the Social Accounts Section.
+    6. Now, you can copy your Token Key and Token Secret. 
+    Coupled with the App key and App secret you've got previously 
+    you can configure your plurk account in the Social Accounts Section.
 
 
 
@@ -217,22 +221,22 @@ It's most likely the same as for Twitter, you will need some more effort in orde
 Please note that only real personal Facebook accounts have permissions to create an App.
 Business accounts can't manage Facebook Apps.
 
-    1. Please go at this url https://developers.facebook.com/apps 
+    1. Please browse to this url https://developers.facebook.com/apps 
     and click on 'Apps' -> 'Create new App'.
-    Note: If you can't click on 'Create new App', you will need first 
+    Note: If you can not click on 'Create new App', you'll need first 
     to 'Register as a Developer'.
     Then the creation of New App will be available.
 
-    2. Fill in your 'App name' and click continue.
+    2. Fill in your 'App Name' and then, click continue.
 
-    3. Enter the required security check.
+    3. Enter the required Security Check.
 
     4. Once on the basic settings of your new App, 
     for the field 'App Domains' enter your Blog domain name 
     (example: mydomain.com)
     Then click 'Add Platform' and choose 'Website'.
     
-    5. In the field 'Site url' enter your Blog url.
+    5. For the field 'Site url' enter your Blog Url.
     (example: http://mydomain.com)
     Save changes.
     
@@ -248,19 +252,19 @@ Business accounts can't manage Facebook Apps.
 **friendfeed.com accounts** [Help with screenshots](http://efficientscripts.com/help/microblogposter/friendfeedhelp "FriendFeed help with screenshots.")
 
 
-Instead of the password, the friendfeed Api requires the remote key to let you post with it.
+Instead of the password, the Friendfeed API requires the Remote Key to let you post with it.
 
-    1. You can find your remote key associated with your account at this url:
-    https://friendfeed.com/account/api (you need to be logged in).
+    1. You can find your Remote Key associated with your account at this Url:
+    https://friendfeed.com/account/api (You must be logged in).
 
 
 **diigo.com accounts** [Help with screenshots](http://efficientscripts.com/help/microblogposter/diigohelp "Diigo help with screenshots.")
 
 
-In addition to your username and password you will need to create your own diigo App and generate an Api key.
+In addition to your username and password you will need to create your own Diigo App and generate an API Key.
 
-    1. Please go at this url: https://www.diigo.com/api_keys/new/
-    and generate your diigo Api key. (you need to be logged in)
+    1. Please browse to this Url: https://www.diigo.com/api_keys/new/
+    and generate your Diigo API Key. (You need to be logged in)
 
 
 **linkedin.com accounts** [Help with screenshots](http://efficientscripts.com/help/microblogposter/linkedinhelp "Linkedin help with screenshots.")
@@ -270,13 +274,13 @@ In addition to your username and password you will need to create your own diigo
     and click on 'Add New Application'.
 
     2. Fill in the required informations.
-    For 'Live status', select live.
+    For 'Live Status', select Live.
     Leave everything else by Default.
     Click the button 'Add Application'.
 
-    3. Copy 'Api Key' and 'Secret Key', click 'Done'.
+    3. Copy 'Api Key' and 'Secret Key', and click 'Done'.
 
-    4. Configure your linkedin account in the Social Accounts Section.
+    4. Configure your Linkedin account in the Social Accounts Section.
 
     5. Follow the link provided by MicroblogPoster to authorize your App 
     posting on your behalf.
@@ -287,7 +291,7 @@ Basically your tumblr username and password won't suffice in order to post autom
 No worries, it's rather a simple procedure.
 
 
-    1. In order to post updates through the tumblr Api you will need first
+    1. To post updates through the tumblr Api you'll need first
     to create your own tumblr App here: http://www.tumblr.com/oauth/apps
     
     2. Once you have created your tumblr App copy your 'OAuth Consumer key'.
@@ -312,6 +316,5 @@ In order to avoid it, please limit the number of social accounts based on your e
 = The PHP cURL extension is required? =
 
 Yes, otherwise the plugin simply won't function at all.
-
 
 
